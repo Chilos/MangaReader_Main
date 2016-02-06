@@ -1,0 +1,110 @@
+﻿<Page
+    x:Class="MangaReader.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <!--<Grid x:Name="MainGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <RelativePanel>
+            <Button Name="HamburgerButton"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    FontFamily="Segoe MDL2 Assets"
+                    Content="&#xe700;"
+                    FontSize="20"
+                    Width="45"
+                    Height="45"
+                    HorizontalAlignment="Center"
+                    Command="{Binding HamburgerCommand}"/>
+            <TextBlock RelativePanel.RightOf="HamburgerButton"
+                       Text="{Binding Test}"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Margin="20,0,0,0"
+                       VerticalAlignment="Center"/>
+            <AutoSuggestBox RelativePanel.AlignRightWithPanel="True"
+                            QueryIcon="Find"
+                            PlaceholderText="Поиск"
+                            Margin="0,0,10,0"
+                            Width="300"/>
+        </RelativePanel>
+        
+        <SplitView Name="SvMainMenu"
+                   Grid.Row="1"
+                   DisplayMode="CompactOverlay"
+                   OpenPaneLength="150"
+                   CompactPaneLength="45"
+                   IsPaneOpen="{Binding IsOpenPanel}">
+            <SplitView.Pane>
+                <StackPanel>
+                    <Border BorderThickness="3,0,0,0" 
+                            BorderBrush="DarkGray"
+                            >
+                        <StackPanel Orientation="Horizontal">
+                            <Grid Width="42"
+                                  Height="45">
+                                <TextBlock Text="&#xE909;"
+                                   FontSize="20"
+                                   
+                                   FontFamily="Segoe MDL2 Assets"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                            </Grid>
+                            <TextBlock Text="Каталог"
+                                   FontSize="18"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </SplitView.Pane>
+        </SplitView>
+        
+    </Grid>-->
+    <Grid x:Name="MainGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.Resources>
+            <Style x:Key="VerticalScrollViewerStyle" TargetType="ScrollViewer">
+                <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
+                <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
+                <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
+                <Setter Property="ScrollViewer.VerticalScrollMode" Value="Enabled" />
+                <Setter Property="ScrollViewer.ZoomMode" Value="Disabled" />
+            </Style>
+        </Grid.Resources>
+
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="BtnReload" Click="Button_Click" HorizontalAlignment="Center">hello</Button>
+                <ListView ItemsSource="{Binding Tiles}">
+                    <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                            <WrapGrid Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                            <Grid>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding Image}"/>
+                                    <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="{Binding Title}"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackPanel>
+        <Grid x:Name="LoadInfo"  Visibility="Collapsed" Opacity="0.7">
+            <Border Width="250" Height="40" BorderThickness="2" Background="#0078D7" Canvas.ZIndex="50">
+                <StackPanel Orientation="Horizontal">
+                    <ProgressRing Width="20" Foreground="#FFFFFF" Height="20" Margin="10,0,10,0" HorizontalAlignment="Left" IsActive="True" Visibility="Visible"/>
+                    <TextBlock VerticalAlignment="Center" FontSize="11" Foreground="#ffffff">Загрузка. Пожалуйста, подождите...</TextBlock>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>
